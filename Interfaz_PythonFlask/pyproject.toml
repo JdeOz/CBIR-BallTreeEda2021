@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "IntefazCBIR"
+version = "0.1.0"
+description = "Interfaz del CBIR Proyecto Final EDA 2021"
+authors = ["Juan Diego Obando"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Flask = "^2.0.2"
+Pillow = "^8.4.0"
+numpy = "^1.19.5"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
