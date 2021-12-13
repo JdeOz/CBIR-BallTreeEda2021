@@ -2,4 +2,7 @@
 cmake-build-*/
 .idea/
 __pycache__/
-poetry.lock
+BallTreeInterface
+GenerateBallTree
+BallTreeFile.bin
+build/
