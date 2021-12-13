@@ -4,11 +4,25 @@ Proyecto final del curso de Estructuras de Datos Avanzadas UCSP CCOMP6-1 2021.
 
 ## Requisitos:
 
-1. Este programa solo corre en Linux o en windows con un WLS ya que usa un sistemas de pipes exclusivo de Linux para la comunicación entre C++ y Python.
+1. Este programa solo corre en Linux o en windows con un WSL ya que usa un sistemas de pipes exclusivo de Linux para la comunicación entre C++ y Python.
+
+    * Instalar  WSL Ubunto para windows aqui: https://www.microsoft.com/store/productId/9N9TNGVNDL3Q
+
 2. Versión mínima de Python "3.6".
+
 3. Versión mínima de C++ "11".
+
+    *Instalar compilador c++ para ubuntu: `$ sudo apt install g++`
+
 4. Para compilar el código de C++ se utilizará CMake (versión mínima 3.10).
+
+   *Instalar compilador Cmake para ubuntu: `$ sudo apt install cmake`
+
 5. Para ejecutar el código de Python se utilizará Poetry (versión mínima 1.1.12).
+
+   *Instalar compilador Poetry para ubuntu:<br/>
+`$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`<br/>
+o `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -`
 
 ## Instrucciones de compilación y ejecución
 

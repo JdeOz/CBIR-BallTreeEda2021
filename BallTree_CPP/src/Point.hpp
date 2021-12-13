@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 
+// Uso el Point que se nos proporcionó para la tarea del KDTree :3
 template<size_t N>
 class Point {
 public:

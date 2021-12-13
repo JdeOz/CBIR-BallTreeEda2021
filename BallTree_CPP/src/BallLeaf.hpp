@@ -5,6 +5,7 @@
 
 #include "Point.hpp"
 
+// Uso esta estructura para almacenar en un solo objeto el Point de la imagen y su valor que en este caso es su índice.
 template<size_t N, typename ElemType>
 struct BallLeaf {
     Point<N> coords;
