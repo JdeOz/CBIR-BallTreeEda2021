@@ -47,7 +47,7 @@ int main() {
         for (auto i: knn) {
             results += to_string(i) + ","; // Convierto mi resultado en un string para enviarlo por el fifo
         }
-        results.pop_back(); // Le quito la última como que se pone por error
+        results.pop_back(); // Le quito la última coma que se pone por error
         fifoWrite(results); // Envío mi resultado
     }
 }
