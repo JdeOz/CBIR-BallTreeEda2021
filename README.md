@@ -12,15 +12,15 @@ Proyecto final del curso de Estructuras de Datos Avanzadas UCSP CCOMP6-1 2021.
 
 3. Versión mínima de C++ "11".
 
-    *Instalar compilador c++ para ubuntu: `$ sudo apt install g++`
+    * **Instalar compilador c++ para ubuntu: `$ sudo apt install g++`**
 
 4. Para compilar el código de C++ se utilizará CMake (versión mínima 3.10).
 
-   *Instalar compilador Cmake para ubuntu: `$ sudo apt install cmake`
+   * **Instalar compilador Cmake para ubuntu: `$ sudo apt install cmake`**
 
 5. Para ejecutar el código de Python se utilizará Poetry (versión mínima 1.1.12).
 
-   *Instalar compilador Poetry para ubuntu:<br/>
+   * **Instalar compilador Poetry para ubuntu:<br/>**
 `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`<br/>
 o `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -`
 
@@ -73,9 +73,10 @@ Pasos:
 Esta interfaz consta de 3 partes:
 
 1. Una pizarra donde podemos dibujar un número para hacer la consulta al Ball Tree.
-2. Un formulario para subur una imagen para hacer la consulta al Ball Tree.
-3. Aqui aparecen las respuestas listadas en orden de semejanza y la etiqueta de cada imagen es su id correspondiente.
+2. Un formulario para subir una imagen para hacer la consulta al Ball Tree.
+3. Aqui tendremos en la parte superior la última imagen buscada, y abajo tendremos las respuestas listadas en orden de semejanza con la imagen de arriba y la etiqueta de cada imagen es su id correspondiente.
 
+![alt text](https://raw.githubusercontent.com/jdotaz1/MNIST-BMP/main/EDA%20CBIR.png)
 
 ## Contenido:
 
