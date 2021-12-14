@@ -6,7 +6,7 @@ Proyecto final del curso de Estructuras de Datos Avanzadas UCSP CCOMP6-1 2021.
 
 1. Este programa solo corre en Linux o en windows con un WSL ya que usa un sistemas de pipes exclusivo de Linux para la comunicación entre C++ y Python.
 
-    * Instalar  WSL Ubunto para windows aqui: https://www.microsoft.com/store/productId/9N9TNGVNDL3Q
+    * Instalar WSL Ubuntu para Windows aqui: https://www.microsoft.com/store/productId/9N9TNGVNDL3Q
 
 2. Versión mínima de Python "3.6".
 
@@ -30,7 +30,7 @@ Pasos:
 
 ### a. Compilar con Cmake
 
-1. Entrar a la carpeta "BallTree_CPP" y abrir un terminal desde ahí.
+1. Desde la terminal tenemos que ir a la carpeta "BallTree_CPP".
 
 2. Con los siguientes comandos crearemos un carpeta llamada "build" y entraremos en ella:<br/>
 
@@ -44,7 +44,7 @@ Pasos:
    
 **Esto generará 2 ejecutables (*GenerateBallTree* y *BallTreeInterface*) dentro de la carpeta "Interfaz_PythonFlask".**
 
-5. Ahora tenemos que abrir la carpeta "Interfaz_PythonFlask" y ejecutar el archivo "GenerateBallTree" de la siguente forma:<br/>
+5. Ahora desde la terminal tenemos que ir a la carpeta "Interfaz_PythonFlask" y ejecutar el archivo "GenerateBallTree" de la siguente forma:<br/>
 
   * `$ ./GenerateBallTree`<br/>
   
@@ -54,9 +54,9 @@ Pasos:
 
 ### b. Ejecutar la interfaz Gráfica
 
-1. Entrar a la carpeta "Interfaz_PythonFlask" y abrir un terminal desde ahí.
+1. Desde la terminal tenemos que ir a la carpeta  "Interfaz_PythonFlask".
 
-2. Instalaremos las dependencias del proyecto y crear un venv con Poetry usando el siguiente comando:<br/>
+2. Instalaremos las dependencias del proyecto y crearemos un venv con Poetry usando el siguiente comando:<br/>
 
    * `$ poetry install`<br/>
    
@@ -94,14 +94,14 @@ El repositorio consta de 2 carpetas: "BallTree_CPP" e "Interfaz_PythonFlask".
     
     #### b. BallTreeInterface
 
-    Este es el programa que usa la interfaz para hacerle consultas al árbol, lo que hace es leer el árbol desde "BallTreeFile.bin" (este proceso lo hace mucho más rápido que si lo generamos desde 0), luego entra en un bucle infinito esperando a que la interfaz le haga consultas. Python se encarga de ejecutarlo asi que no tenemos que ejecutarlo manualmente.
+    Este es el programa que usa la interfaz para hacerle consultas al árbol, lo que hace es leer el árbol desde "BallTreeFile.bin" (este proceso lo hace mucho más rápido que si lo generamos desde 0), luego entra en un bucle infinito esperando a que la interfaz le haga consultas. Python se encarga de ejecutarlo asi que no tenemos que hacerlo manualmente.
 
 ### 2. Interfaz_PythonFlask
 
 * En esta carpeta se encunetran todos los archivos necesarios para ejecutar la interfaz gráfica en Python - Flask (app.py, functions.py, static y templates).
 * Tambien se crearán aqui los ejecutables que compilaremos en Cmake.
-* En la carpeta Files guardaremos el dataset de MNIST y el "BallTreeFile.bin",
-* Para el manejo de las dependencias utilizamos la herramienta Poetry, este descargará las librerias necesarias y ejecutará el archivo principal "app.py".
+* En la carpeta Files guardaremos el dataset de MNIST y el "BallTreeFile.bin".
+* Para el manejo de las dependencias utilizamos la herramienta Poetry, esta descargará las librerias necesarias y ejecutará el archivo principal "app.py".
 
 
 
