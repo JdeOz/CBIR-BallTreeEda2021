@@ -11,6 +11,7 @@ BallTree<N, ElemType, L> GenerateBallTree() {
 }
 
 int main() {
+    cout << "Construyendo BallTree..." << endl;
     // Declaración funciones Timer
     Timer<BallTree<784, int, 10>()> Ball_Tree_Generate(GenerateBallTree, "Generate");
 

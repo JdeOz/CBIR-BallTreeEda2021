@@ -36,11 +36,11 @@ class BallTree {
 public:
     BallTree() {
         DataSetTree = read_mnist_images_points<784, int>("Files/train-images-idx3-ubyte"); // Cargo las imágenes
-        queue<vector<BallLeaf<N, ElemType>>> DataSet;
-        DataSet.push(DataSetTree);
-        int label = 0;
+        queue<vector<BallLeaf<N, ElemType>>> DataSet; // Creo una cola con el conjunto de datos que le entraran a cada Node
+        DataSet.push(DataSetTree); // Inicio la cola con todos los datos
+        int label = 0; // Indice correspondiente a cada hijo
         while (!DataSet.empty()) {
-            auto node = new BallNode<N, ElemType, L>;
+            auto node = new BallNode<N, ElemType, L>; // Nuevo nodo que crearé
 
             // Centro del nodo
             Point<N> center = mean<N, ElemType>(DataSet.front()); // Generamos el centro del Nodo
@@ -55,16 +55,16 @@ public:
             if (DataSet.front().size() <= L) {
                 // En el caso que si sea hoja copio las BallLeaf en la data de mi Node
                 node->isLeaf = true;
-                node->num = DataSet.front().size();
-                for (int i = 0; i < DataSet.front().size(); i++) {
+                node->num = DataSet.front().size(); // Asigno la cantidad de hojas que tendrá el nodo hoja
+                for (int i = 0; i < DataSet.front().size(); i++) { // Guardo los índices de los BallLeaf hijos
                     node->data[i] = DataSet.front()[i].value;
                 }
-                node->left = -1;
-                node->right = -1;
+                node->left = -1; // Declaro nulos los hijos, ya que es nodo hoja
+                node->right = -1; // Declaro nulos los hijos, ya que es nodo hoja
             } else {
-                // En el caso que no sea hoja divido mis datos en izq y der
+                // En el caso que no sea hoja divido mis datos en izquierdo y derecho
                 node->isLeaf = false;
-                node->num = 0;
+                node->num = 0; // Como es intermedio entonces no tiene hojas
 
                 random_device rd; // Iniciamos generador aleatorio
                 mt19937 mt(rd()); // Iniciamos generador aleatorio
@@ -74,50 +74,50 @@ public:
                 Point<N> x1 = argmax<N, ElemType>(DataSet.front(),
                                                   DataSet.front()[x0].coords); // Nodo más lejano del random
                 Point<N> x2 = argmax<N, ElemType>(DataSet.front(), x1); // Nodo más lejano del más lejano
-                Point<N> W = vectorsRes<N>(x1, x2); // Vector que entre 2 puntos
+                Point<N> W = vectorsRes<N>(x1, x2); // Calculamos el vector entre los puntos x1 y x2
                 priority_queue<pair<double, BallLeaf<N, ElemType>>> Z; // Creo una cola de prioridad para separar la data
-                int median = DataSet.front().size() / 2; // Guardo la mediana que está en la mitad de mi Z
+                int median = DataSet.front().size() / 2; // Guardo el índice de la mediana que sería en la mitad de mi Z
                 for (int i = 0; i < DataSet.front().size(); i++) { // Asigno su posición en el vector W
                     Z.push(pair<double, BallLeaf<N, ElemType>>(vectorsMult(W, DataSet.front()[i].coords),
                                                                DataSet.front()[i]));
                 }
                 vector<BallLeaf<N, ElemType>> SL; // Creamos la nueva DataSet para el hijo izquierdo
                 vector<BallLeaf<N, ElemType>> SR; // Creamos la nueva DataSet para el hijo derecho
-                for (int i = 0; i < median; i++) {
+                for (int i = 0; i < median; i++) { // Llenamos el hijo izquierdo con la mitad de los datos
                     SL.push_back(Z.top().second);
                     Z.pop();
                 }
-                while (!Z.empty()) {
+                while (!Z.empty()) { // Llenamos el hijo derecho con lo que queda de los datos
                     SR.push_back(Z.top().second);
                     Z.pop();
                 }
 
-                DataSet.push(SL);
-                node->left = ++label;
+                DataSet.push(SL); // Agregamos SL a mi cola de DataSet
+                node->left = ++label; // Le asignamos el hijo izquierdo a mi nodo
 
-                DataSet.push(SR);
-                node->right = ++label;
+                DataSet.push(SR);// Agregamos SR a mi cola de DataSet
+                node->right = ++label; // Le asignamos el hijo derecho a mi nodo
 
             }
-            Nodes.push_back(node);
-            DataSet.pop();
+            Nodes.push_back(node); // Agregamos el nodo que creamos a nuestro vector de nodos
+            DataSet.pop(); // descartamos el DataSet correspondiente que ya usamos
         }
     }
 
     BallTree(string name) {
         DataSetTree = read_mnist_images_points<784, int>("Files/train-images-idx3-ubyte"); // Cargo las imágenes
-        LoadBallTree(name);
+        LoadBallTree(name); // Cargo los nodos a mi árbol
     }
 
     vector<ElemType> KNN_search(Point<N> t, int k) {
-        priority_queue<pair<double, BallLeaf<N, ElemType>>> Q;
-        vector<ElemType> res;
-        KNN(t, k, Q, Nodes[0]);
+        priority_queue<pair<double, BallLeaf<N, ElemType>>> Q; // Cola en la que se almacenará los resultados del KNN
+        vector<ElemType> res; // vector que llenaré con los resultados
+        KNN(t, k, Q, Nodes[0]); // Calculo el KNN
         while (!Q.empty()) {
-            res.push_back(Q.top().second.value);
+            res.push_back(Q.top().second.value); // Lleno res con los resultados
             Q.pop();
         }
-        return res;
+        return res; // Devuelvo res
     }
 
     void SaveBallTree(string name) {
@@ -155,20 +155,21 @@ private:
     vector<BallLeaf<N, ElemType>> DataSetTree;
 
     void KNN(Point<N> t, int k, priority_queue<pair<double, BallLeaf<N, ElemType>>> &Q, BallNode<N, ElemType, L> *B) {
+        // Si el nodo está muy alejado y mi cola ya está completa lo descarto
         if (Q.size() == k and euclidian<N>(t, B->ctr) - B->r >= Q.top().first) {
             return;
-        } else if (B->isLeaf) {
+        } else if (B->isLeaf) { // Si mi nodo es hoja entonces pregunto BallLeaf por BallLeaf (data)
             for (int i = 0; i < B->num; i++) {
                 double distance = euclidian(t, DataSetTree[B->data[i]].coords);
                 if (Q.size() < k or distance < Q.top().first) {
                     pair<double, BallLeaf<N, ElemType>> x(distance, DataSetTree[B->data[i]]);
-                    Q.push(x);
-                    if (Q.size() > k) {
+                    Q.push(x); // Si está más cerca que el nodo más lejano del la cola entonces valen como respuesta.
+                    if (Q.size() > k) { // Si mi cola se pasa de k entonces le quito el elemento más lejano.
                         Q.pop();
                     }
                 }
             }
-        } else {
+        } else { // Si mi nodo es intermedio entonces aplico el KNN a cada hijo, pero primero al más cercano
             double d1 = euclidian(t, Nodes[B->left]->ctr);
             double d2 = euclidian(t, Nodes[B->right]->ctr);
             if (d1 < d2) {
